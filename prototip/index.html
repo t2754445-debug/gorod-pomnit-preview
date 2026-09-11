@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ковалёвское кладбище — Город помнит</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=PT+Serif:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#F2F7FA; --paper:#FFFFFF; --paper-2:#FBFDFE;
+  --line:#D7E5ED; --line-soft:#EAF1F6;
+  --text:#1E252B; --head:#0F2436; --lead:#3C4A57; --muted:#5B6875;
+  --blue:#00679F; --blue-dark:#07538A; --blue-soft:#E8F2F8;
+  --red:#EF3E4A; --alarm:#D62F42; --ok:#1B7A4B;
+
+  --serif:'PT Serif',Georgia,serif;
+  --sans:'Golos Text',system-ui,-apple-system,sans-serif;
+  --display:Geologica,system-ui,sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+
+  /* Направление A: воздуха больше, шкала заголовков спокойнее */
+  --gap-sec:56px;
+  --wrap:1240px;
+  --pad:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);overflow-x:hidden}
+body{font-family:var(--sans);color:var(--text);font-size:16px;line-height:1.6}
+img,svg{max-width:100%;display:block}
+a{color:var(--blue);text-decoration:none}
+ol,ul{list-style:none;margin:0;padding:0}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+
+/* ── шапка: второе состояние, для страницы объекта ── */
+.hdr{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+.hdr__top{display:flex;align-items:center;gap:14px;padding:10px 0;min-height:56px}
+.brand{display:flex;align-items:center;gap:9px;flex:none}
+.brand__mark{width:32px;height:32px;border-radius:8px;background:var(--blue-soft);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:700;
+  font-size:15px;color:var(--blue)}
+.brand__name{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--head);
+  letter-spacing:-.005em;white-space:nowrap}
+.hdr__spacer{flex:1}
+.hdr__tool{display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;
+  border:1px solid var(--line);border-radius:999px;background:var(--paper-2);
+  font-size:14px;color:var(--muted);white-space:nowrap}
+.hdr__flag{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--red);
+  border:1px solid var(--red);border-radius:999px;padding:4px 9px;white-space:nowrap}
+@media (max-width:860px){ .hdr__tool--search{display:none} }
+@media (max-width:600px){ .hdr__tool{display:none} .hdr__flag{font-size:9px} }
+
+/* название объекта — крупно, бренд ушёл в строку выше */
+.hdr__object{padding:0 0 14px}
+.crumbs{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding:10px 0 12px;display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a{color:var(--muted)}
+.crumbs a:hover{color:var(--blue)}
+
+.obj__status{display:inline-flex;align-items:center;gap:9px;margin:0 0 12px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ok)}
+.obj__status i{width:10px;height:10px;border-radius:3px;background:currentColor;font-style:normal}
+h1{font-family:var(--serif);font-weight:700;color:var(--head);margin:0 0 8px;
+  font-size:clamp(27px,5vw,44px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+.obj__kind{margin:0;font-size:15px;color:var(--muted)}
+
+/* ── первый экран ── */
+.lede{display:grid;gap:var(--pad);padding:26px 0 0}
+@media (min-width:900px){ .lede{grid-template-columns:minmax(0,1fr) 340px;align-items:start} }
+
+.facts-top{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.facts-top__row{display:grid;grid-template-columns:132px 1fr;gap:14px;
+  padding:15px 18px;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.facts-top__row:last-child{border-bottom:0}
+.facts-top__row dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.facts-top__row dd{margin:0;font-size:16.5px;line-height:1.45}
+.facts-top__hours{display:flex;gap:22px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.facts-top__hours b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  color:var(--muted);font-weight:400;margin-bottom:2px}
+@media (max-width:560px){
+  .facts-top__row{grid-template-columns:1fr;gap:4px}
+}
+
+.acts{display:flex;flex-direction:column;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;
+  border-radius:13px;font-size:16px;font-weight:500;padding:0 20px;text-align:center}
+.btn--main{background:var(--blue);color:#fff}
+.btn--main:hover{background:var(--blue-dark);color:#fff}
+.btn--plain{background:var(--paper);border:1px solid var(--line);color:var(--text)}
+.btn--plain:hover{border-color:var(--blue)}
+.btn small{font-family:var(--mono);font-size:10px;letter-spacing:.12em;opacity:.7}
+
+/* ── схема ── */
+.shema{margin:var(--gap-sec) 0 0;background:var(--paper);border:1px solid var(--line);
+  border-radius:18px;overflow:hidden}
+.shema__head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:16px 20px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
+.shema__title{font-family:var(--display);font-weight:600;font-size:17px;color:var(--head)}
+.shema__note{font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.shema__pic{background:#F2F7FA}
+.shema__legend{display:flex;gap:18px;flex-wrap:wrap;padding:14px 20px;
+  border-top:1px solid var(--line-soft);font-size:13.5px;color:var(--muted)}
+.shema__legend span{display:flex;align-items:center;gap:7px}
+.shema__legend i{width:14px;height:4px;border-radius:2px;font-style:normal}
+
+/* ── оглавление ── */
+.toc{margin:var(--gap-sec) 0 0}
+.toc__label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc__list{display:grid;gap:2px;background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden}
+.toc__list a{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:48px;padding:10px 18px;color:var(--text);font-size:16px;
+  border-bottom:1px solid var(--line-soft)}
+.toc__list a:last-child{border-bottom:0}
+.toc__list a:hover{background:var(--blue-soft);color:var(--blue)}
+.toc__list em{font-style:normal;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;color:var(--muted)}
+
+/* на широком экране оглавление становится липкой колонкой слева */
+@media (min-width:1100px){
+  .body-grid{display:grid;grid-template-columns:248px minmax(0,1fr);gap:48px;
+    align-items:start;margin-top:var(--gap-sec)}
+  .toc{margin:0;position:sticky;top:84px}
+  .toc__list{border:0;background:none;gap:0}
+  .toc__list a{border-bottom:0;min-height:40px;padding:8px 12px;border-radius:9px;
+    font-size:15px;color:var(--muted)}
+  .toc__list a:hover{background:var(--blue-soft)}
+  .toc__list em{display:none}
+  .sections{margin-top:0}
+}
+
+/* ── секции ── */
+.sections{margin-top:var(--gap-sec)}
+.sec{margin-bottom:var(--gap-sec);scroll-margin-top:88px}
+.sec h2{font-family:var(--serif);font-weight:700;color:var(--head);
+  font-size:clamp(21px,2.6vw,28px);line-height:1.16;letter-spacing:-.012em;margin:0 0 16px}
+.sec p{margin:0 0 14px;max-width:38em;font-size:16.5px;line-height:1.65}
+.sec p:last-child{margin-bottom:0}
+
+.route{display:grid;gap:12px}
+@media (min-width:700px){ .route{grid-template-columns:1fr 1fr} }
+.route__card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px}
+.route__tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:9px}
+.route__card h3{font-family:var(--display);font-weight:600;font-size:17.5px;margin:0 0 7px;color:var(--head)}
+.route__card p{margin:0;font-size:15.5px;color:var(--lead)}
+.route__after{margin-top:14px;font-size:15px;color:var(--muted)}
+
+.warn{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--alarm);
+  border-radius:14px;padding:18px 20px;margin-top:18px}
+.warn__tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--alarm);margin-bottom:9px}
+.warn p{margin:0;font-size:16.5px}
+
+/* таблица: на телефоне разворачивается в карточки, без бокового скролла */
+.tbl{width:100%;border-collapse:collapse;background:var(--paper);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:16px}
+.tbl th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);font-weight:400;padding:13px 18px;
+  background:var(--paper-2);border-bottom:1px solid var(--line)}
+.tbl td{padding:14px 18px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+@media (max-width:620px){
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tbl tr{border-bottom:1px solid var(--line);padding:6px 0}
+  .tbl tr:last-child{border-bottom:0}
+  .tbl td{border-bottom:0;padding:7px 18px;display:grid;grid-template-columns:1fr;gap:2px}
+  .tbl td::before{content:attr(data-label);font-family:var(--mono);font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+}
+
+.docs{display:grid;gap:10px;margin-top:16px}
+@media (min-width:620px){ .docs{grid-template-columns:repeat(3,1fr)} }
+.docs__item{background:var(--paper);border:1px solid var(--line);border-radius:13px;
+  padding:15px 17px;display:flex;gap:11px;align-items:baseline}
+.docs__num{font-family:var(--mono);font-size:12px;color:var(--blue)}
+
+.src{margin:var(--gap-sec) 0 var(--gap-sec);font-size:13.5px;line-height:1.6;
+  color:var(--muted);max-width:46em}
+
+.offer{background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:24px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;
+  justify-content:space-between}
+.offer h2{margin:0 0 7px;font-size:21px}
+.offer p{margin:0;font-size:15.5px;color:var(--muted);max-width:40em}
+.offer .btn{flex:none}
+
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <div class="hdr__top">
+      <a class="brand" href="#">
+        <span class="brand__mark">Гп</span>
+        <span class="brand__name">Город помнит</span>
+      </a>
+      <span class="hdr__spacer"></span>
+      <span class="hdr__flag">ПРОТОТИП</span>
+      <span class="hdr__tool hdr__tool--search">Поиск по сайту…</span>
+      <span class="hdr__tool">Санкт-Петербург</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Хлебные крошки">
+    <a href="#">Справочник</a> <span>/</span>
+    <a href="#">Ленобласть</a> <span>/</span>
+    <a href="#">Всеволожский район</a>
+  </nav>
+
+  <div class="hdr__object">
+    <p class="obj__status"><i></i> Места дают</p>
+    <h1>Ковалёвское кладбище</h1>
+    <p class="obj__kind">Санкт-Петербург и область · кладбище</p>
+  </div>
+
+  <div class="lede">
+    <dl class="facts-top">
+      <div class="facts-top__row">
+        <dt>Адрес</dt>
+        <dd>188640, Ленинградская область, Всеволожский район, платформа Ковалево</dd>
+      </div>
+      <div class="facts-top__row">
+        <dt>Ближайшее метро</dt>
+        <dd>Девяткино, 9 км — дальше автобусом или электричкой до платформы Ковалёво, 0,9 км от ворот</dd>
+      </div>
+      <div class="facts-top__row">
+        <dt>Часы работы</dt>
+        <dd>
+          <span class="facts-top__hours">
+            <span><b>Май–сентябрь</b>9:00–18:00</span>
+            <span><b>Октябрь–апрель</b>9:00–17:00</span>
+          </span>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="acts">
+      <a class="btn btn--main" href="https://yandex.ru/maps/?rtext=~59.99041,30.5673" target="_blank" rel="noopener">
+        Маршрут <small>ЯНДЕКС</small>
+      </a>
+      <a class="btn btn--plain" href="tel:+79219560774">+7 (921) 956-07-74</a>
+    </div>
+  </div>
+
+  <figure class="shema">
+    <figcaption class="shema__head">
+      <span class="shema__title">Схема кладбища и что вокруг</span>
+      <span class="shema__note">116,6 га · 319 дорожек · OpenStreetMap</span>
+    </figcaption>
+    <div class="shema__pic" id="pic"></div>
+    <div class="shema__legend">
+      <span><i style="background:#CFE3EF"></i> территория</span>
+      <span><i style="background:#FFFFFF;border:1px solid #D7E5ED"></i> дорожки внутри</span>
+      <span><i style="background:#EF3E4A"></i> ворота</span>
+      <span><i style="background:#C6D5E0"></i> улицы вокруг</span>
+    </div>
+  </figure>
+
+  <div class="body-grid">
+
+    <nav class="toc" aria-label="Разделы страницы">
+      <p class="toc__label">На этой странице</p>
+      <div class="toc__list">
+        <a href="#kak-dobratsya">Как добраться <em>метро, электричка</em></a>
+        <a href="#fakty">Справочные данные <em>7 строк</em></a>
+        <a href="#mesta">Места и подзахоронение <em>санитарный срок</em></a>
+        <a href="#upravlenie">Кто управляет <em>РИТЭК</em></a>
+        <a href="#pamyatnik">Памятник ставят с разрешения <em>3 документа</em></a>
+        <a href="#istoriya">История <em>есть</em></a>
+        <a href="#voprosy">Вопросы и ответы</a>
+        <a href="#ryadom">Кладбища рядом</a>
+      </div>
+    </nav>
+
+    <div class="sections">
+
+      <section class="sec" id="kak-dobratsya">
+        <h2>Как добраться</h2>
+        <div class="route">
+          <article class="route__card">
+            <p class="route__tag">Электричка</p>
+            <h3>До платформы Ковалёво</h3>
+            <p>С Финляндского вокзала, направление на Невскую Дубровку. От платформы
+              до ворот 0,9 км — около двенадцати минут пешком вдоль путей.</p>
+          </article>
+          <article class="route__card">
+            <p class="route__tag">Метро и дальше</p>
+            <h3>Девяткино, 9 км</h3>
+            <p>От метро автобусом до Всеволожска, дальше до кладбища. Дорога
+              от центра города занимает около полутора часов.</p>
+          </article>
+        </div>
+        <p class="route__after">На машине — по Дороге жизни до Всеволожска, у платформы
+          Ковалёво поворот к воротам. Парковка у входа неорганизованная, в поминальные
+          дни машины стоят вдоль дороги.</p>
+      </section>
+
+      <section class="sec" id="fakty">
+        <h2>Справочные данные</h2>
+        <table class="tbl">
+          <thead><tr><th>Поле</th><th>Значение</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Поле">Адрес</td><td data-label="Значение">188640, Ленинградская область, Всеволожский район, платформа Ковалево</td></tr>
+            <tr><td data-label="Поле">Часы работы</td><td data-label="Значение">май–сентябрь 9:00–18:00, октябрь–апрель 9:00–17:00</td></tr>
+            <tr><td data-label="Поле">Район</td><td data-label="Значение">Всеволожский район</td></tr>
+            <tr><td data-label="Поле">Площадь</td><td data-label="Значение">116,6 га</td></tr>
+            <tr><td data-label="Поле">Ближайшее метро</td><td data-label="Значение">Девяткино, 9 км</td></tr>
+            <tr><td data-label="Поле">Железная дорога</td><td data-label="Значение">Ковалёво, 0,9 км</td></tr>
+            <tr><td data-label="Поле">Телефон администрации</td><td data-label="Значение">+7 (921) 956-07-74</td></tr>
+            <tr><td data-label="Поле">Места</td><td data-label="Значение">дают места (перечень постановления № 377)</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="sec" id="mesta">
+        <h2>Места и подзахоронение</h2>
+        <p>Ковалёвское входит в перечень постановления № 377: здесь предоставляют
+          места под новые захоронения. Участок выделяет администрация, обращаться
+          нужно с свидетельством о смерти и паспортом заявителя.</p>
+        <div class="warn">
+          <p class="warn__tag">Санитарный срок · 20 лет</p>
+          <p><strong>Подзахоронение гробом в существующую могилу — не раньше чем через
+            20 лет после последних похорон.</strong> Это санитарный срок, сократить его
+            нельзя. Для урны с прахом такого ограничения нет.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="upravlenie">
+        <h2>Кто управляет</h2>
+        <p>Кладбище эксплуатирует ООО «РИТЭК» — по данным госсайта СПб ГКУ
+          «Специализированная служба по вопросам похоронного дела». Приём директора
+          на проспекте Металлистов, 5. Вопросы по участку, уборке и порядку
+          на территории решают здесь.</p>
+      </section>
+
+      <section class="sec" id="pamyatnik">
+        <h2>Памятник ставят с разрешения</h2>
+        <p>Поставить или заменить памятник, ограду, цветник — любое надмогильное
+          сооружение — можно только с разрешения администрации. Выдают его
+          по трём документам.</p>
+        <div class="docs">
+          <div class="docs__item"><span class="docs__num">01</span><span>Чек на покупку</span></div>
+          <div class="docs__item"><span class="docs__num">02</span><span>Договор на работы</span></div>
+          <div class="docs__item"><span class="docs__num">03</span><span>Свидетельство о смерти</span></div>
+        </div>
+      </section>
+
+      <section class="sec" id="istoriya">
+        <h2>История</h2>
+        <p>Здесь на странице идёт текст из <code>content.py</code> — он не меняется
+          при перевёрстке. У кладбищ, для которых историю ещё не собрали, раздел
+          честно говорит об этом, а не показывает правдоподобную выдумку.</p>
+      </section>
+
+      <section class="sec" id="voprosy">
+        <h2>Вопросы и ответы</h2>
+        <p>Аккордеон на месте, строки 52 пикселя. Содержимое из генератора.</p>
+      </section>
+
+      <section class="sec" id="ryadom">
+        <h2>Кладбища рядом</h2>
+        <p>Список ближайших с расстояниями — как сейчас.</p>
+      </section>
+
+      <section class="sec">
+        <div class="offer">
+          <div>
+            <h2>Памятник, ограда, благоустройство</h2>
+            <p>Единственный коммерческий блок на странице, внизу. Работы делает
+              партнёрская мастерская, цену считают по замеру.</p>
+          </div>
+          <a class="btn btn--main" href="#">Что входит в смету</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <p class="src">Адрес, часы работы, телефон и эксплуатирующая организация — по данным
+    СПб ГКУ «Специализированная служба по вопросам похоронного дела». Границы,
+    дорожки и ворота — OpenStreetMap, © OpenStreetMap contributors. Часы обзвоном
+    не проверялись.</p>
+
+</div>
+
+<script>
+// Схема грузится отдельным файлом: так её кэширует браузер и не раздувает HTML.
+fetch("shema-kovalevskoe.svg")
+  .then(function (r) { return r.text(); })
+  .then(function (svg) { document.getElementById("pic").innerHTML = svg; })
+  .catch(function () {
+    document.getElementById("pic").innerHTML =
+      '<p style="padding:20px;color:#5B6875">Схема не загрузилась.</p>';
+  });
+</script>
+
+</body>
+</html>
