@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Город помнит — решения и выбор компоновки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F7FA; --paper:#FFFFFF; --line:#D7E5ED; --line-soft:#EAF1F6;
+  --text:#1E252B; --head:#0F2436; --lead:#3C4A57; --muted:#5B6875;
+  --blue:#00679F; --blue-dark:#07538A; --red:#EF3E4A;
+  --serif:'PT Serif',Georgia,serif; --sans:'Golos Text',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);overflow-x:hidden}
+body{font-family:var(--sans);color:var(--text);line-height:1.5}
+a{color:var(--blue);text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:840px;margin:0 auto;padding:0 16px}
+
+header{background:var(--paper);border-bottom:1px solid var(--line);padding:18px 0}
+.brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.005em;color:var(--head)}
+.brand span{display:block;font-family:var(--sans);font-weight:600;font-size:9.5px;
+  letter-spacing:.22em;color:var(--blue);margin-top:3px}
+
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(26px,6vw,38px);
+  line-height:1.1;letter-spacing:-.015em;color:var(--head);margin:26px 0 10px}
+.lead{font-size:17px;color:var(--lead);margin:0 0 6px;max-width:34em}
+.stamp{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted);
+  text-transform:uppercase;margin:0 0 28px}
+
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(21px,4.4vw,27px);
+  line-height:1.15;letter-spacing:-.015em;color:var(--head);margin:38px 0 14px}
+h3{font-family:var(--sans);font-weight:600;font-size:17px;margin:0 0 6px;color:var(--head)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;
+  padding:18px;margin-bottom:12px}
+.card p{margin:0;font-size:15.5px;color:var(--lead)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue);
+  text-transform:uppercase;margin-bottom:9px}
+.tag--open{color:var(--red)}
+
+.done{border-left:4px solid var(--blue)}
+.open{border-left:4px solid var(--red)}
+
+.shot{background:var(--paper);border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;margin-bottom:14px}
+.shot img{width:100%}
+.shot__cap{padding:14px 18px;border-top:1px solid var(--line-soft)}
+.shot__cap b{display:block;font-size:16px;color:var(--head);margin-bottom:4px}
+.shot__cap span{font-size:14.5px;color:var(--muted)}
+.pick{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.14em;background:#E8F2F8;color:var(--blue);padding:5px 10px;border-radius:999px}
+
+.links{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  min-height:54px;padding:12px 18px;border-bottom:1px solid var(--line-soft);color:var(--text)}
+.links a:last-child{border-bottom:0}
+.links b{font-weight:500;font-size:16px}
+.links span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);
+  flex:none;text-align:right}
+
+footer{margin:44px 0 40px;font-size:13px;color:var(--muted)}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Город помнит<span>РАБОЧАЯ СТРАНИЦА · НЕ ДЛЯ ПОКАЗА</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h1>Решения и выбор компоновки</h1>
+  <p class="lead">Что уже договорились менять, что осталось выбрать и как это выглядит.
+    Здесь же — живая сборка на 124 страницах, чтобы смотреть с телефона без туннеля.</p>
+  <p class="stamp">Обновлено 11 сентября 2026</p>
+
+  <h2>Что решено</h2>
+
+  <div class="card done">
+    <div class="tag">Глубина перевёрстки</div>
+    <h3>Внутренние страницы — да, главная — нет</h3>
+    <p>Переверстываем страницу кладбища, хабы, справочные статьи, метро и подборки.
+      Главная остаётся как есть: она сверена с макетом попиксельно, расхождение 0,06%,
+      и служит эталоном для остальных.</p>
+  </div>
+
+  <div class="card done">
+    <div class="tag">Страница кладбища</div>
+    <h3>Компоновка «меню разделов»</h3>
+    <p>Вместо свитка в один столбец — липкое меню разделов: вертикальное слева на широком
+      экране, лентой вкладок на телефоне. Причина: человек приходит за часами, телефоном
+      и дорогой, а свиток заставляет проскроллить мимо истории и документов.</p>
+  </div>
+
+  <div class="card done">
+    <div class="tag">Данные и тексты</div>
+    <h3>data.py и content.py не трогаем</h3>
+    <p>Слияние источников, тексты 44 страниц, 16 историй и шесть правил проекта остаются
+      без изменений. Меняются только шаблоны и CSS — они ни с чем, кроме данных, не связаны.</p>
+  </div>
+
+  <h2>Что осталось выбрать</h2>
+
+  <div class="card open">
+    <div class="tag tag--open">Вопрос 1</div>
+    <h3>Поиск в шапке</h3>
+    <p>Поле есть на всех 124 страницах, обработчика нет: ввод ничего не делает.
+      Либо убрать поле, либо сделать поиск по собранному индексу страниц.
+      Неработающее поле на справочнике по смерти стоит дороже, чем на обычном сайте.</p>
+  </div>
+
+  <div class="card open">
+    <div class="tag tag--open">Вопрос 2</div>
+    <h3>Шапка на странице объекта</h3>
+    <p>Спецификация дизайна требует второго состояния: крупно название кладбища,
+      бренд — мелкой строкой слева. Сейчас шапка одна на весь сайт. Делаем по спецификации
+      или оставляем единую.</p>
+  </div>
+
+  <div class="card open">
+    <div class="tag tag--open">Вопрос 3</div>
+    <h3>Мобильная раскладка внутренних страниц</h3>
+    <p>На 499 строк стилей внутренних страниц приходится один медиазапрос — всё держится
+      на резиновых сетках. Для таблиц, шагов и фактов нужна своя мобильная раскладка,
+      иначе меню разделов на телефоне будет тесно.</p>
+  </div>
+
+  <h2>Три компоновки — как выглядят</h2>
+
+  <div class="shot">
+    <img src="img/tri-na-telefone.png" alt="Три компоновки страницы кладбища на телефоне">
+    <div class="shot__cap">
+      <b>Все три на телефоне</b>
+      <span>Слева направо: свиток, карточка фактов, меню разделов.</span>
+    </div>
+  </div>
+
+  <div class="shot">
+    <img src="img/variant-1.png" alt="Компоновка «свиток»">
+    <div class="shot__cap">
+      <b>1. Свиток</b>
+      <span>Всё одной колонкой сверху вниз. Так собрано сейчас: четырнадцать секций подряд,
+        оглавления нет.</span>
+    </div>
+  </div>
+
+  <div class="shot">
+    <img src="img/variant-2.png" alt="Компоновка «карточка фактов»">
+    <div class="shot__cap">
+      <b>2. Карточка фактов</b>
+      <span>На широком экране факты, часы и кнопки уезжают в липкую колонку справа.
+        На телефоне сворачиваются в полосу «Факты» сверху.</span>
+    </div>
+  </div>
+
+  <div class="shot">
+    <img src="img/variant-3.png" alt="Компоновка «меню разделов»">
+    <div class="shot__cap">
+      <b>3. Меню разделов</b>
+      <span>Липкое меню: вертикальное слева на широком экране, лентой вкладок на телефоне.
+        Из любой точки страницы видно, что на ней есть.</span>
+      <span class="pick">ВЫБРАНО</span>
+    </div>
+  </div>
+
+  <h2>Живая сборка</h2>
+
+  <div class="links">
+    <a href="../spb/"><b>Главная Петербурга</b><span>ЭТАЛОН</span></a>
+    <a href="../spb/kladbischa/"><b>Все 65 кладбищ</b><span>СПИСОК + ФИЛЬТР</span></a>
+    <a href="../spb/kladbischa/kovalevskoe/"><b>Ковалёвское кладбище</b><span>ДАННЫХ МНОГО</span></a>
+    <a href="../spb/kladbischa/bogoslovskoe/"><b>Богословское кладбище</b><span>ДАННЫХ МНОГО</span></a>
+    <a href="../spb/umer-blizkiy/"><b>Умер близкий</b><span>СПРАВОЧНАЯ</span></a>
+    <a href="../spb/vyplaty/"><b>Выплаты и льготы</b><span>СПРАВОЧНАЯ</span></a>
+    <a href="../spb/kladbischa/u-metro/"><b>Кладбища у метро</b><span>28 СТАНЦИЙ</span></a>
+    <a href="../spb/karta-sayta/"><b>Карта сайта</b><span>ВСЕ 124 СТРАНИЦЫ</span></a>
+  </div>
+
+  <footer>
+    <p>Превью закрыто от поисковиков: robots.txt запрещает обход, на каждой странице стоит noindex.</p>
+    <p>Собрано генератором из C:\РАЗРАБОТКА\leadgen-seo\gorod\ — 124 страницы, 65 кладбищ.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
