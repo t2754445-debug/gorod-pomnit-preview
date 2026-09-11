@@ -109,6 +109,33 @@ h1{font-family:var(--serif);font-weight:700;color:var(--head);margin:0 0 8px;
 .shema__legend span{display:flex;align-items:center;gap:7px}
 .shema__legend i{width:14px;height:4px;border-radius:2px;font-style:normal}
 
+
+/* ── известные захоронения ── */
+.graves{margin-top:14px;background:var(--paper);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden}
+.graves__head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:15px 20px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
+.graves__title{font-family:var(--display);font-weight:600;font-size:17px;color:var(--head)}
+.graves__count{font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.graves__list{display:grid}
+.graves__list a,.graves__list div{display:flex;justify-content:space-between;
+  align-items:center;gap:14px;min-height:48px;padding:11px 20px;
+  border-bottom:1px solid var(--line-soft);color:var(--text);font-size:16px}
+.graves__list :last-child{border-bottom:0}
+.graves__rod{display:block;font-style:normal;font-family:var(--mono);
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  margin-top:3px}
+.graves__uch{font-family:var(--mono);font-size:12.5px;color:var(--blue);flex:none;
+  white-space:nowrap}
+.graves details summary{list-style:none;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;gap:8px;min-height:50px;
+  font-size:15px;color:var(--blue);border-top:1px solid var(--line-soft)}
+.graves details summary::-webkit-details-marker{display:none}
+.graves details[open] summary{border-top:1px solid var(--line-soft)}
+.graves__note{margin:0;padding:13px 20px;font-size:13.5px;line-height:1.5;
+  color:var(--muted);border-top:1px solid var(--line-soft)}
+
 /* ── оглавление ── */
 .toc{margin:var(--gap-sec) 0 0}
 .toc__label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
@@ -273,6 +300,18 @@ h1{font-family:var(--serif);font-weight:700;color:var(--head);margin:0 0 8px;
     </div>
   </figure>
 
+
+  <section class="graves" id="zahoroneniya" hidden>
+    <div class="graves__head">
+      <span class="graves__title">Известные захоронения</span>
+      <span class="graves__count" id="gravesCount"></span>
+    </div>
+    <div class="graves__list" id="gravesList"></div>
+    <p class="graves__note">Участки — по разметке OpenStreetMap. На месте
+      ориентируйтесь на таблички: нумерация совпадает, но границы участков
+      в данных могут быть неточными.</p>
+  </section>
+
   <div class="body-grid">
 
     <nav class="toc" aria-label="Разделы страницы">
@@ -418,6 +457,64 @@ fetch("shema-kovalevskoe.svg")
     document.getElementById("pic").innerHTML =
       '<p style="padding:20px;color:#5B6875">Схема не загрузилась.</p>';
   });
+
+// Известные захоронения: имя и участок. Первые три видны сразу,
+// остальные под раскрывашкой — на больших кладбищах список длинный.
+var VIDNO = 3;
+
+fetch("shema-kovalevskoe.json")
+  .then(function (r) { return r.json(); })
+  .then(function (d) {
+    var graves = (d && d.graves) || [];
+    if (!graves.length) return;
+
+    var sec = document.getElementById("zahoroneniya");
+    var list = document.getElementById("gravesList");
+    document.getElementById("gravesCount").textContent =
+      graves.length + (graves.length === 1 ? " имя" :
+        graves.length < 5 ? " имени" : " имён");
+
+    function row(g) {
+      var el = document.createElement("div");
+      var name = document.createElement("span");
+      name.textContent = g.name;
+      if (g.rod) {
+        var rod = document.createElement("i");
+        rod.className = "graves__rod";
+        rod.textContent = g.rod;
+        name.appendChild(rod);
+      }
+      el.appendChild(name);
+      if (g.uchastok) {
+        var u = document.createElement("span");
+        u.className = "graves__uch";
+        u.textContent = "участок " + g.uchastok;
+        el.appendChild(u);
+      }
+      return el;
+    }
+
+    graves.slice(0, VIDNO).forEach(function (g) { list.appendChild(row(g)); });
+
+    if (graves.length > VIDNO) {
+      var det = document.createElement("details");
+      var sum = document.createElement("summary");
+      var hidden = graves.length - VIDNO;
+      sum.textContent = "Показать ещё " + hidden;
+      var inner = document.createElement("div");
+      inner.className = "graves__list";
+      graves.slice(VIDNO).forEach(function (g) { inner.appendChild(row(g)); });
+      det.appendChild(sum);
+      det.appendChild(inner);
+      det.addEventListener("toggle", function () {
+        sum.textContent = det.open ? "Свернуть" : "Показать ещё " + hidden;
+      });
+      list.parentNode.insertBefore(det, list.nextSibling);
+    }
+
+    sec.hidden = false;
+  })
+  .catch(function () { /* нет данных — блока просто нет */ });
 </script>
 
 </body>
