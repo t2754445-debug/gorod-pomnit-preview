@@ -110,7 +110,40 @@
           </div>
   </div>
 
-  
+    <figure class="shema" id="shema">
+    <figcaption class="shema__head">
+      <span class="shema__title">Схема кладбища и что вокруг</span>
+      <span class="shema__note">3,2 га · 5 дорожек · OpenStreetMap</span>
+    </figcaption>
+    <div class="shema__pic" data-shema="shema.svg" data-title="Александровское кладбище · схема">
+      <img src="shema.svg" alt="Схема: Александровское кладбище, контур, дорожки и улицы вокруг" width="1200" height="800" decoding="async">
+      <button class="shema__zoom" type="button" data-zoom-open>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8M10.5 7.5v6M7.5 10.5h6"/></svg>
+        Увеличить
+      </button>
+    </div>
+    <div class="shema__legend">
+            <span><i style="background:#FFFFFF;border:1px solid #D7E5ED"></i> дорожки</span>
+            <span><i style="background:#EF3E4A"></i> ворота</span>
+            <span><i style="background:#C6D5E0"></i> улицы вокруг</span>
+          </div>
+  </figure>
+
+  <div class="viewer" hidden role="dialog" aria-modal="true" aria-label="Схема кладбища" data-viewer>
+    <div class="viewer__bar">
+      <span class="viewer__title">Александровское кладбище · схема</span>
+      <button class="viewer__btn" type="button" aria-label="Закрыть" data-zoom-close>×</button>
+    </div>
+    <div class="viewer__stage" data-stage>
+      <span class="viewer__hint" data-hint>Щипок — увеличить, палец — двигать</span>
+      <div class="viewer__zoom">
+        <button class="viewer__btn" type="button" aria-label="Приблизить" data-zoom-in>+</button>
+        <button class="viewer__btn" type="button" aria-label="Отдалить" data-zoom-out>−</button>
+      </div>
+    </div>
+  </div>
+
+    
   <div class="body-grid">
 
     <nav class="toc" aria-label="Разделы страницы">
