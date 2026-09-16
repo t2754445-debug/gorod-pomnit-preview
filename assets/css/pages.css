@@ -752,3 +752,34 @@
     margin-bottom: 2px;
   }
 }
+
+/* --- поиск по сайту: выдача под полем в шапке и в мобильном меню --- */
+
+.sr-wrap { position: relative; display: block; }
+.sr {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  width: min(420px, 92vw);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-pop);
+  padding: 6px;
+  z-index: 45;
+}
+.menu .sr { position: static; width: auto; margin-top: 8px; box-shadow: none; }
+.sr__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--text);
+}
+.sr__item:hover, .sr__item.is-on { background: var(--bg); color: var(--text); }
+.sr__title { font-size: 15px; line-height: 1.3; }
+.sr__sec { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.sr__empty { margin: 0; padding: 12px; font-size: 14.5px; line-height: 1.45; color: var(--muted); }

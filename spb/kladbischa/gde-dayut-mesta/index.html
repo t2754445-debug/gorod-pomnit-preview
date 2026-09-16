@@ -26,11 +26,12 @@
     <nav class="nav" aria-label="Основные разделы">      <a href="../../../spb/kladbischa/">Кладбища</a>      <a href="../../../spb/spravochnik/">Справочник</a>      <a href="../../../spb/uslugi/">Услуги</a>      <a href="../../../spb/poleznoe/">Полезное</a>      <a href="../../../o-proekte/">О проекте</a>    </nav>
 
     <div class="header__tools">
-      <search>
+      <search class="sr-wrap">
         <label class="search-pill">
           <img src="../../../assets/png/search.png" alt="" width="18" height="18">
-          <input type="search" placeholder="Поиск по сайту…" aria-label="Поиск по сайту">
+          <input type="search" placeholder="Поиск по сайту…" aria-label="Поиск по сайту" autocomplete="off" data-site-search>
         </label>
+        <div class="sr" hidden data-sr></div>
       </search>
       <button class="city-btn" type="button" aria-haspopup="true" aria-expanded="false" data-cities>
         <img src="../../../assets/png/map-pin.png" alt="" width="18" height="18">
@@ -49,11 +50,12 @@
   </div>
 
   <div class="menu" hidden data-menu-pop>
-    <search>
+    <search class="sr-wrap">
       <label class="menu__search">
         <img src="../../../assets/png/search.png" alt="" width="19" height="19">
-        <input type="search" placeholder="Поиск по сайту…" aria-label="Поиск по сайту">
+        <input type="search" placeholder="Поиск по сайту…" aria-label="Поиск по сайту" autocomplete="off" data-site-search>
       </label>
+      <div class="sr" hidden data-sr></div>
     </search>
     <nav class="menu__nav" aria-label="Основные разделы">      <a href="../../../spb/kladbischa/">Кладбища</a>      <a href="../../../spb/spravochnik/">Справочник</a>      <a href="../../../spb/uslugi/">Услуги</a>      <a href="../../../spb/poleznoe/">Полезное</a>      <a href="../../../o-proekte/">О проекте</a>    </nav>
     <div>
@@ -378,7 +380,7 @@
 </footer>
 
 <script>
-// Шапка: бургер и выпадашка городов. Больше на странице скриптов нет.
+// Шапка: бургер и выпадашка городов.
 (function () {
   function toggle(btn, pop) {
     if (!btn || !pop) return;
@@ -390,6 +392,155 @@
   }
   toggle(document.querySelector('[data-menu]'), document.querySelector('[data-menu-pop]'));
   toggle(document.querySelector('[data-cities]'), document.querySelector('[data-cities-pop]'));
+})();
+
+// Поиск по сайту. Индекс грузится скриптом по первому фокусу, не с загрузкой
+// страницы. Запрос от двух букв: сначала вхождение, потом нечёткое сравнение
+// (Дамерау—Левенштейн: 1 для слов до пяти букв, 2 для длинных) — «богославское»
+// находит Богословское. Набрано латиницей в русской раскладке — переводим.
+(function () {
+  var BASE = "../../../";
+  var LAT = "qwertyuiop[]asdfghjkl;'zxcvbnm,.`";
+  var CYR = "йцукенгшщзхъфывапролджэячсмитьбюё";
+  var index = null, loading = false, waiting = [];
+
+  function load(cb) {
+    if (index) return cb();
+    waiting.push(cb);
+    if (loading) return;
+    loading = true;
+    var s = document.createElement('script');
+    s.src = BASE + 'assets/search.js';
+    s.onload = function () {
+      index = (window.GP_SEARCH || []).map(function (r) {
+        var hay = norm(r.t + ' ' + (r.k || ''));
+        return { r: r, hay: hay, words: hay.split(' '), title: norm(r.t) };
+      });
+      waiting.forEach(function (f) { f(); });
+      waiting = [];
+    };
+    document.head.appendChild(s);
+  }
+  function norm(s) {
+    return s.toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я0-9]+/g, ' ').trim();
+  }
+  function layout(s) {
+    if (!/[a-z]/.test(s)) return s;
+    return s.split('').map(function (ch) {
+      var i = LAT.indexOf(ch);
+      return i < 0 ? ch : CYR.charAt(i);
+    }).join('');
+  }
+  // расстояние Дамерау—Левенштейна: перестановка соседних букв — одна правка
+  function dl(a, b) {
+    var d = [], i, j;
+    for (i = 0; i <= a.length; i++) d[i] = [i];
+    for (j = 0; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) {
+      for (j = 1; j <= b.length; j++) {
+        var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+        if (i > 1 && j > 1 && a.charAt(i - 1) === b.charAt(j - 2) && a.charAt(i - 2) === b.charAt(j - 1)) {
+          d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+        }
+      }
+    }
+    return d[a.length][b.length];
+  }
+  function tokenScore(t, e) {
+    var at = e.hay.indexOf(t);
+    if (at === 0 || (at > 0 && e.hay.charAt(at - 1) === ' ')) return e.title.indexOf(t) >= 0 ? 5 : 4;
+    if (at > 0) return 2;
+    if (t.length < 4) return 0;
+    var lim = t.length <= 5 ? 1 : 2;
+    for (var i = 0; i < e.words.length; i++) {
+      var w = e.words[i];
+      if (w.length < 3) continue;
+      // слово могут недопечатать: сравниваем и с началом слова той же длины
+      if (dl(t, w) <= lim || (w.length > t.length && dl(t, w.slice(0, t.length)) <= lim)) return 1;
+    }
+    return 0;
+  }
+  function find(q) {
+    var toks = norm(layout(q.toLowerCase())).split(' ').filter(Boolean);
+    var out = [];
+    index.forEach(function (e, n) {
+      var sum = 0;
+      for (var i = 0; i < toks.length; i++) {
+        var sc = tokenScore(toks[i], e);
+        if (!sc) return;
+        sum += sc;
+      }
+      out.push({ e: e, s: sum, n: n });
+    });
+    out.sort(function (a, b) { return b.s - a.s || a.n - b.n; });
+    return out.slice(0, 8).map(function (x) { return x.e.r; });
+  }
+
+  function bind(input) {
+    var wrap = input.closest('search');
+    var box = wrap.querySelector('[data-sr]');
+    var active = -1, items = [];
+
+    function render() {
+      var q = input.value.trim();
+      items = [];
+      if (q.length < 2 || !index) { box.hidden = true; return; }
+      items = find(q);
+      active = -1;
+      box.innerHTML = '';
+      if (!items.length) {
+        var p = document.createElement('p');
+        p.className = 'sr__empty';
+        p.appendChild(document.createTextNode('Ничего не нашлось. '));
+        var all = document.createElement('a');
+        all.href = BASE + 'spb/kladbischa/';
+        all.textContent = 'Список всех кладбищ';
+        p.appendChild(all);
+        box.appendChild(p);
+      }
+      items.forEach(function (r) {
+        var a = document.createElement('a');
+        a.className = 'sr__item';
+        a.href = BASE + r.u;
+        var t = document.createElement('span');
+        t.className = 'sr__title';
+        t.textContent = r.t;
+        var s = document.createElement('span');
+        s.className = 'sr__sec';
+        s.textContent = r.s;
+        a.appendChild(t);
+        a.appendChild(s);
+        box.appendChild(a);
+      });
+      box.hidden = false;
+    }
+    function mark() {
+      [].forEach.call(box.querySelectorAll('.sr__item'), function (a, i) {
+        a.classList.toggle('is-on', i === active);
+      });
+    }
+    input.addEventListener('focus', function () { load(render); });
+    input.addEventListener('input', function () { load(render); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        if (!items.length) return;
+        e.preventDefault();
+        active = (active + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+        mark();
+      } else if (e.key === 'Enter') {
+        if (!items.length) return;
+        e.preventDefault();
+        location.href = BASE + items[Math.max(active, 0)].u;
+      } else if (e.key === 'Escape') {
+        box.hidden = true;
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!wrap.contains(e.target)) box.hidden = true;
+    });
+  }
+  [].forEach.call(document.querySelectorAll("[data-site-search]"), bind);
 })();
 </script>
 
