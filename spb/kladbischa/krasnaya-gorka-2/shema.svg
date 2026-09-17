@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" role="img" aria-label="Схема кладбища: контур, дорожки и ворота">
+<rect x="0" y="0" width="1200" height="800" fill="#F2F7FA"/>
+<g fill="#E2E9EF" stroke="none">
+</g>
+<g stroke="#C6D5E0" stroke-width="2.4" fill="none" stroke-linecap="round">
+</g>
+<g fill="#CFE3EF" stroke="#00679F" stroke-width="3" stroke-linejoin="round">
+<path d="M381.4 276.6L531.4 251.3L529.4 339.5L742.3 368.4L756.5 305.9L807.2 301.9L852.3 317.7L865.0 416.6L906.3 433.3L984.6 535.2L876.1 579.3L748.4 576.3L575.0 531.1L597.8 441.4L570.4 386.7L514.7 394.8L495.4 494.1L421.9 472.8L381.4 276.6Z"/>
+</g>
+<g stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round">
+<path d="M237.2 266.2L215.4 325.2L228.4 386.6L259.6 423.4L303.3 443.8L351.5 444.1L395.4 424.3L427.2 388.0L440.9 341.8L434.1 294.1L408.1 253.5L367.5 227.5L319.7 220.7L273.5 234.5L237.2 266.2"/>
+<path d="M341.2 510.1L375.8 495.7L413.0 462.9L425.0 448.0L430.3 426.2L421.4 380.6L407.2 347.6L408.5 335.0L415.3 330.4L427.7 331.4L545.4 364.9L584.1 378.5L589.0 400.3L600.9 426.4L607.5 435.3L618.1 442.7L633.3 443.4L695.4 440.1L835.4 452.6"/>
+</g>
+<text x="14" y="786" font-family="Golos Text, system-ui, sans-serif" font-size="15" fill="#5B6875">© OpenStreetMap contributors</text>
+</svg>
