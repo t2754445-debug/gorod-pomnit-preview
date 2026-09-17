@@ -783,3 +783,143 @@
 .sr__title { font-size: 15px; line-height: 1.3; }
 .sr__sec { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .sr__empty { margin: 0; padding: 12px; font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+
+/* --- карта кладбищ по районам на странице «Кладбища», 17.09.2026 ---
+   Разметку рисует gorod/karta.py. Варианта три, на выбор: geo, cvet, plitki.
+   Карточка та же, что у схемы кладбища: .shema. */
+
+.karta { margin: 26px 0 24px; }
+.karta__pic { position: relative; background: #D3E5F0; }
+.karta__svg { display: block; width: 100%; height: auto; }
+.karta__r path { transition: fill .15s; }
+.karta__r:focus-visible { outline: none; }
+.karta__r:focus-visible path { stroke: var(--blue); stroke-width: 3; }
+.karta--geo .karta__r:hover path { fill: #EAF3FA; }
+.karta--geo .karta__r.is-on path { fill: #DCEBF5; stroke: var(--blue); stroke-width: 2; }
+.karta--cvet .karta__r:hover path { stroke: var(--head); stroke-width: 2.5; }
+.karta--cvet .karta__r.is-on path { stroke: var(--head); stroke-width: 3.5; }
+.karta__t circle:last-child { transition: r .15s; }
+.karta__t:hover circle:last-child, .karta__t:focus-visible circle:last-child { r: 9; }
+
+.karta__legend .karta__key { width: 12px; height: 12px; border-radius: 50%; }
+.karta__key--dot-open { background: var(--blue); }
+.karta__key--dot-closed { background: #D62F42; }
+.karta__key--dot-unknown { background: var(--paper); box-shadow: inset 0 0 0 2px #7C8B97; }
+.karta__hint, .karta__far { flex-basis: 100%; }
+.shema__legend .karta__far { display: block; }
+.karta__hint { color: var(--text); }
+
+.karta__tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 300px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--head);
+  box-shadow: var(--shadow-pop);
+  color: #FFFFFF;
+  font-size: 13.5px;
+  line-height: 1.35;
+  pointer-events: none;
+}
+.karta__tip b { font-weight: 600; }
+.karta__tip span { color: #C9D7E2; }
+
+.filter__count { scroll-margin-top: 96px; }
+
+/* вариант «районы цветом»: карта и колонка со шкалой и районами области */
+.karta__split { display: grid; }
+@media (min-width: 900px) {
+  .karta__split { grid-template-columns: minmax(0, 1fr) 300px; }
+  .karta__side { border-left: 1px solid var(--line-soft); }
+}
+.karta__side { display: flex; flex-direction: column; gap: 10px; padding: 18px 20px; }
+.karta__cap { margin: 8px 0 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.karta__cap:first-child { margin-top: 0; }
+.karta__scale { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; color: var(--muted); }
+.karta__scale span { display: flex; align-items: center; gap: 6px; }
+.karta__scale i, .karta__chip i { flex: none; width: 14px; height: 14px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(15, 36, 54, .12); }
+.karta__chips { display: flex; flex-direction: column; gap: 6px; }
+.karta__chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+.karta__chip span { flex: 1; }
+.karta__chip b { font-family: var(--display); font-weight: 600; }
+.karta__chip:hover { border-color: var(--blue); }
+.karta__chip.is-on { border-color: var(--blue); background: var(--hero-bg); }
+.karta__small { margin: 4px 0 0; font-size: 13px; line-height: 1.45; color: var(--muted); }
+
+/* вариант «плитки»: на широком экране район стоит примерно на своём месте,
+   на телефоне плитки идут списком в два столбца, пустые районы прячутся */
+.plitki { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; background: var(--bg); }
+@media (min-width: 768px) {
+  .plitki { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: minmax(112px, auto); gap: 10px; padding: 16px; }
+  .plitka { grid-column: var(--c); grid-row: var(--r) / span var(--rs); }
+}
+.plitka {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+}
+.plitka--obl { border-style: dashed; background: #F9FBFD; }
+.plitka--empty { border-color: var(--line-soft); background: transparent; }
+@media (max-width: 767.98px) { .plitka--empty { display: none; } }
+.plitka:has(.plitka__head.is-on) { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+.plitka__head {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--head);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.plitka__head:hover .plitka__name { color: var(--blue); }
+.plitka__name { font-family: var(--display); font-weight: 600; font-size: 14.5px; line-height: 1.2; hyphens: auto; overflow-wrap: break-word; }
+.plitka--empty .plitka__name { color: var(--muted); font-weight: 500; }
+.plitka__tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.plitka__row { display: flex; align-items: center; gap: 8px; }
+.plitka__count { margin-left: auto; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--blue); }
+.plitka__dots { display: flex; flex-wrap: wrap; gap: 4px; }
+.plitka__dot { width: 9px; height: 9px; border-radius: 50%; }
+.plitka__dot--open { background: var(--blue); }
+.plitka__dot--closed { background: #D62F42; }
+.plitka__dot--unknown { box-shadow: inset 0 0 0 1.8px #7C8B97; }
+.plitka__list { display: flex; flex-direction: column; gap: 3px; font-size: 13.5px; line-height: 1.3; }
+.plitka__list a { color: var(--text); }
+.plitka__list a:hover { color: var(--blue); }
+.plitka__more { align-self: flex-start; padding: 0; border: 0; background: none; color: var(--blue); font: inherit; font-size: 13px; cursor: pointer; }
+.plitka__none { font-size: 12.5px; color: var(--muted); }
+/* на телефоне плитка — только кнопка района: названия и так в списке ниже */
+@media (max-width: 767.98px) {
+  .plitka { padding: 11px 12px; }
+  .plitka__name { font-size: 14px; }
+  .plitka__list, .plitka__more { display: none; }
+}

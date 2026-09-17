@@ -84,6 +84,7 @@
   </header>
 
   
+  
   <div class="filter">
     <label class="filter__field">
       <img src="../../assets/png/search.png" alt="" width="20" height="20">
@@ -94,6 +95,7 @@
       <button type="button" class="chip" data-filter="open">Дают места</button>
       <button type="button" class="chip" data-filter="city">Город</button>
       <button type="button" class="chip" data-filter="region">Область</button>
+      <button type="button" class="chip chip--on chip--rayon" id="rayon" hidden aria-label="Сбросить район"><span></span> ×</button>
     </div>
   </div>
 
@@ -104,6 +106,7 @@
        href="../../spb/kladbischa/vvedenskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Лодейнопольский район"
        data-search="введенское кладбище введенское кладбище лодейнопольский район лодейное поле девяткино лодейное поле">
       <span class="item__main">
         <span class="item__name">Введенское кладбище</span>
@@ -115,6 +118,7 @@
        href="../../spb/kladbischa/ioannovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Ломоносовский район"
        data-search="иоанновское кладбище иоанновское кладбище ломоносовский район лаголовское сельское поселение проспект ветеранов тайцы">
       <span class="item__main">
         <span class="item__name">Иоанновское кладбище</span>
@@ -126,6 +130,7 @@
        href="../../spb/kladbischa/ivanovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Ломоносовский район"
        data-search="ивановское кладбище ивановское ломоносовский район копорское сельское поселение юго-западная калище">
       <span class="item__main">
         <span class="item__name">Кладбище Ивановское</span>
@@ -137,6 +142,7 @@
        href="../../spb/kladbischa/krasnaya-gorka/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="красная горка кладбище красная горка всеволожский район колтушское городское поселение улица дыбенко моряков-балтийцев">
       <span class="item__main">
         <span class="item__name">Кладбище Красная Горка</span>
@@ -148,6 +154,7 @@
        href="../../spb/kladbischa/krasnaya-gorka-2/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="красная горка 2 кладбище красная горка 2 всеволожский район колтушское городское поселение улица дыбенко всеволожская">
       <span class="item__main">
         <span class="item__name">Кладбище Красная Горка 2</span>
@@ -159,6 +166,7 @@
        href="../../spb/kladbischa/ryumki/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Ломоносовский район"
        data-search="рюмки кладбище рюмки ломоносовский район аннинское городское поселение проспект ветеранов горелово">
       <span class="item__main">
         <span class="item__name">Кладбище Рюмки</span>
@@ -170,6 +178,7 @@
        href="../../spb/kladbischa/sertolovo/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="сертолово кладбище сертолово всеволожский район сертоловское городское поселение парнас левашово">
       <span class="item__main">
         <span class="item__name">Кладбище Сертолово</span>
@@ -181,6 +190,7 @@
        href="../../spb/kladbischa/uspenskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Гатчинский муниципальный округ"
        data-search="успенское кладбище успенское гатчинский муниципальный округ гатчинский муниципальный округ шушары кобралово">
       <span class="item__main">
         <span class="item__name">Кладбище Успенское</span>
@@ -192,6 +202,7 @@
        href="../../spb/kladbischa/kovalevskoe/"
        data-status="open"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="ковалёвское кладбище ковалёвское кладбище всеволожский район город всеволожск девяткино ковалёво 188640, ленинградская область, всеволожский район, платформа ковалево">
       <span class="item__main">
         <span class="item__name">Ковалёвское кладбище</span>
@@ -203,6 +214,7 @@
        href="../../spb/kladbischa/kuzmolovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="кузьмоловское кладбище кузьмоловское кладбище всеволожский район кузьмоловское городское поселение девяткино токсово">
       <span class="item__main">
         <span class="item__name">Кузьмоловское кладбище</span>
@@ -214,6 +226,7 @@
        href="../../spb/kladbischa/lesnoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Кировский район"
        data-search="лесное кладбище лесное кладбище кировский район мгинское городское поселение рыбацкое 4 км">
       <span class="item__main">
         <span class="item__name">Лесное кладбище</span>
@@ -225,6 +238,7 @@
        href="../../spb/kladbischa/ovcinskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="овцинское кладбище овцинское кладбище всеволожский район свердловское городское поселение рыбацкое понтонная">
       <span class="item__main">
         <span class="item__name">Овцинское кладбище</span>
@@ -236,6 +250,7 @@
        href="../../spb/kladbischa/ozerkovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="озерковское кладбище озерковское кладбище всеволожский район колтушское городское поселение улица дыбенко гранитный">
       <span class="item__main">
         <span class="item__name">Озерковское кладбище</span>
@@ -247,6 +262,7 @@
        href="../../spb/kladbischa/petropavlovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Гатчинский муниципальный округ"
        data-search="петропавловское кладбище петропавловское кладбище гатчинский муниципальный округ вырица шушары вырица">
       <span class="item__main">
         <span class="item__name">Петропавловское кладбище</span>
@@ -258,6 +274,7 @@
        href="../../spb/kladbischa/poroshkinskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="порошкинское кладбище порошкинское кладбище всеволожский район бугровское городское поселение парнас парголово">
       <span class="item__main">
         <span class="item__name">Порошкинское кладбище</span>
@@ -269,6 +286,7 @@
        href="../../spb/kladbischa/preobrazhenskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Кировский район"
        data-search="преображенское кладбище преображенское кладбище кировский район шлиссельбург улица дыбенко сады">
       <span class="item__main">
         <span class="item__name">Преображенское кладбище</span>
@@ -280,6 +298,7 @@
        href="../../spb/kladbischa/pundolovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="пундоловское кладбище пундоловское кладбище всеволожский район заневское городское поселение улица дыбенко моряков-балтийцев">
       <span class="item__main">
         <span class="item__name">Пундоловское кладбище</span>
@@ -291,6 +310,7 @@
        href="../../spb/kladbischa/ryabovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="рябовское кладбище рябовское кладбище всеволожский район всеволожск девяткино мельничный ручей">
       <span class="item__main">
         <span class="item__name">Рябовское кладбище</span>
@@ -302,6 +322,7 @@
        href="../../spb/kladbischa/staroe-kladbische-derevni-smolnaya/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="старое кладбище деревни смольная старое кладбище деревни смольная всеволожский район город всеволожск проспект большевиков ковалёво">
       <span class="item__main">
         <span class="item__name">Старое кладбище деревни Смольная</span>
@@ -313,6 +334,7 @@
        href="../../spb/kladbischa/toksovskoe/"
        data-status="unknown"
        data-scope="region"
+       data-rayon="ОБЛАСТЬ/Всеволожский район"
        data-search="токсовское кладбище токсовское кладбище всеволожский район токсово девяткино кавголово">
       <span class="item__main">
         <span class="item__name">Токсовское кладбище</span>
@@ -330,13 +352,16 @@
 </main>
 
 <script>
-// Фильтр списка: поиск по названию, району и метро плюс три чипа.
+// Фильтр списка: поиск по названию, району и метро, три чипа и район с карты.
 (function () {
   var list = document.getElementById('list');
   var input = document.getElementById('q');
   var count = document.getElementById('count');
   var items = [].slice.call(list.querySelectorAll('.item'));
   var mode = 'all';
+  var rayon = '';
+  var rayonChip = document.getElementById('rayon');
+  var picks = [].slice.call(document.querySelectorAll('[data-pick]'));
 
   function apply() {
     var q = (input.value || '').trim().toLowerCase();
@@ -347,7 +372,7 @@
         || (mode === 'open' && el.dataset.status === 'open')
         || (mode === 'city' && el.dataset.scope === 'city')
         || (mode === 'region' && el.dataset.scope === 'region');
-      var show = okText && okMode;
+      var show = okText && okMode && (!rayon || el.dataset.rayon === rayon);
       el.hidden = !show;
       if (show) shown++;
     });
@@ -363,6 +388,43 @@
       apply();
     });
   });
+
+  // район с карты: повторное нажатие снимает выбор, список прокручивается к началу
+  function pick(key) {
+    rayon = rayon === key ? '' : key;
+    picks.forEach(function (el) { el.classList.toggle('is-on', el.dataset.pick === rayon); });
+    rayonChip.hidden = !rayon;
+    rayonChip.firstChild.textContent = rayon.split('/')[1] + (rayon === 'ОБЛАСТЬ/Кировский район' ? ' области' : '');
+    apply();
+    if (rayon && count.getBoundingClientRect().top > window.innerHeight * 0.7) {
+      count.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  picks.forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); pick(el.dataset.pick); });
+  });
+  if (rayonChip) rayonChip.addEventListener('click', function () { pick(rayon); });
+
+  // подсказка у курсора: название района или кладбища и что там с местами
+  var tip = document.getElementById('karta-tip');
+  if (tip && window.matchMedia('(hover: hover)').matches) {
+    [].slice.call(document.querySelectorAll('[data-tip]')).forEach(function (el) {
+      el.addEventListener('mousemove', function (e) {
+        var lines = el.getAttribute('data-tip').split('\n');
+        tip.innerHTML = '';
+        lines.forEach(function (t, i) {
+          var s = document.createElement(i ? 'span' : 'b');
+          s.textContent = t;
+          tip.appendChild(s);
+        });
+        tip.hidden = false;
+        var x = Math.min(e.clientX + 16, window.innerWidth - tip.offsetWidth - 8);
+        var y = e.clientY + 18 + tip.offsetHeight > window.innerHeight ? e.clientY - tip.offsetHeight - 12 : e.clientY + 18;
+        tip.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      });
+      el.addEventListener('mouseleave', function () { tip.hidden = true; });
+    });
+  }
 })();
 </script>
 

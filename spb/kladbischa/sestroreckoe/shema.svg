@@ -255,9 +255,6 @@
 <path d="M852.4 599.9L839.0 592.7L821.4 578.7L819.6 577.3L798.9 560.7L775.9 544.5"/>
 <path d="M657.9 260.7L645.3 259.9L622.9 263.6L609.4 268.5L606.2 275.7L605.2 285.8L603.0 290.4"/>
 </g>
-<g font-family="JetBrains Mono, monospace" fill="#3D6B86" text-anchor="middle" dominant-baseline="central">
-<text x="635.6" y="284.9" font-size="5">Немецкое кладбище</text>
-</g>
 <circle cx="811.5" cy="505.1" r="3.5" fill="#4FA3C7" opacity=".8"/>
 <circle cx="497.2" cy="447.0" r="3.5" fill="#4FA3C7" opacity=".8"/>
 <circle cx="641.0" cy="437.6" r="3.5" fill="#4FA3C7" opacity=".8"/>

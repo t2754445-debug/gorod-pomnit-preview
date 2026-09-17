@@ -875,23 +875,21 @@
 <path d="M763.0 276.9L765.2 278.4"/>
 </g>
 <g font-family="JetBrains Mono, monospace" fill="#3D6B86" text-anchor="middle" dominant-baseline="central">
-<text x="831.7" y="523.4" font-size="12">Лиственный участок</text>
-<text x="656.1" y="265.6" font-size="12">Сосновый участок</text>
-<text x="733.9" y="302.0" font-size="9">Центральные участки</text>
-<text x="784.2" y="347.4" font-size="11">Совхозный участок</text>
-<text x="679.9" y="186.2" font-size="12">Северный участок</text>
-<text x="564.9" y="195.9" font-size="8">Озёрный участок</text>
-<text x="505.7" y="201.1" font-size="8">Заречные участки</text>
-<text x="415.9" y="433.0" font-size="12">Берёзовый участок</text>
-<text x="483.5" y="356.5" font-size="12">Зелёный участок</text>
-<text x="557.6" y="442.5" font-size="12">Хвойный участок</text>
-<text x="670.9" y="512.8" font-size="12">Восточный участок</text>
-<text x="716.5" y="376.4" font-size="6">Воинско-братский участок</text>
-<text x="685.8" y="383.3" font-size="6">Еловый участок</text>
-<text x="447.0" y="270.1" font-size="12">Лесной участок</text>
-<text x="524.0" y="313.0" font-size="11">Лесной участок</text>
-<text x="601.8" y="333.8" font-size="12">Номерной участок</text>
-<text x="534.4" y="235.6" font-size="7">Номерной участок</text>
+<text x="831.7" y="523.4" font-size="8.5">Лиственный участок</text>
+<text x="656.1" y="265.6" font-size="8.5">Сосновый участок</text>
+<text x="733.9" y="302.0" font-size="5.4">Центральные участки</text>
+<text x="784.2" y="347.4" font-size="6.8">Совхозный участок</text>
+<text x="679.9" y="186.2" font-size="8.5">Северный участок</text>
+<text x="564.9" y="195.9" font-size="4.7">Озёрный участок</text>
+<text x="505.7" y="201.1" font-size="4.5">Заречные участки</text>
+<text x="415.9" y="433.0" font-size="8.5">Берёзовый участок</text>
+<text x="483.5" y="356.5" font-size="8.5">Зелёный участок</text>
+<text x="557.6" y="442.5" font-size="8.5">Хвойный участок</text>
+<text x="670.9" y="512.8" font-size="8.5">Восточный участок</text>
+<text x="447.0" y="270.1" font-size="8.5">Лесной участок</text>
+<text x="524.0" y="313.0" font-size="6.5">Лесной участок</text>
+<text x="601.8" y="333.8" font-size="8.5">Номерной участок</text>
+<text x="534.4" y="235.6" font-size="4.3">Номерной участок</text>
 </g>
 <circle cx="707.9" cy="344.7" r="3.5" fill="#4FA3C7" opacity=".8"/>
 <circle cx="674.4" cy="225.6" r="3.5" fill="#4FA3C7" opacity=".8"/>

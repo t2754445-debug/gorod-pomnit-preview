@@ -673,7 +673,7 @@
 <path d="M516.8 592.7L547.2 568.5"/>
 </g>
 <g font-family="JetBrains Mono, monospace" fill="#3D6B86" text-anchor="middle" dominant-baseline="central">
-<text x="537.1" y="601.6" font-size="9">Участок 8</text>
+<text x="537.1" y="601.6" font-size="5.2">Участок 8</text>
 </g>
 <rect x="512.4" y="434.1" width="13" height="13" rx="3.5" fill="#5B6875" stroke="#FFFFFF" stroke-width="2"/>
 <text x="518.9" y="428.6" font-family="Golos Text, sans-serif" font-size="14" font-weight="500" fill="#0F2436" text-anchor="middle" stroke="#FFFFFF" stroke-width="3.5" paint-order="stroke" stroke-linejoin="round">Туалет</text>

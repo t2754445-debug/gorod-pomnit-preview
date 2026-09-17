@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" role="img" aria-label="Схема кладбища: контур, дорожки и ворота">
+<rect x="0" y="0" width="1200" height="800" fill="#F2F7FA"/>
+<g fill="#E2E9EF" stroke="none">
+</g>
+<g stroke="#C6D5E0" stroke-width="2.4" fill="none" stroke-linecap="round">
+</g>
+<g fill="#CFE3EF" stroke="#00679F" stroke-width="3" stroke-linejoin="round">
+<path d="M666.6 143.6L715.1 255.8L533.4 334.3L484.9 222.1L666.6 143.6Z"/>
+</g>
+<g stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round">
+<path d="M614.1 656.4L628.7 547.0L617.0 423.9L599.9 243.8"/>
+</g>
+<text x="14" y="786" font-family="Golos Text, system-ui, sans-serif" font-size="15" fill="#5B6875">© OpenStreetMap contributors</text>
+</svg>
