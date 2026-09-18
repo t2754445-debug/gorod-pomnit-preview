@@ -923,3 +923,128 @@
   .plitka__name { font-size: 14px; }
   .plitka__list, .plitka__more { display: none; }
 }
+
+/* --- карта во всю ширину, без рамки: варианты vozduh и rayony, 17.09.2026 ---
+   По референсу дизайнера «Карта кладбищ.html»: края карты растворяются в фоне
+   страницы, легенда и панель районов парят над ней белыми карточками. */
+
+.kb { position: relative; margin: 6px calc(50% - 50vw) 0; }
+.kb__stage { position: relative; }
+.kb__map {
+  position: relative;
+  height: clamp(460px, 46vw, 700px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 60px, #000 calc(100% - 140px), transparent 100%),
+                      linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 60px, #000 calc(100% - 140px), transparent 100%),
+              linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-composite: intersect;
+}
+.kb__map .karta__svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.kb .karta__r path { transition: fill .15s; }
+.kb .karta__r:hover path, .kb .karta__r.is-hover path { fill: #E9F1F9; }
+.kb .karta__r.is-on path { fill: #DCE9F5; stroke: var(--blue); stroke-width: 1.6; }
+
+.kb__sky {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: url('../cities/hero-desktop.webp') center bottom / cover no-repeat;
+  opacity: .9;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .55) 40%, #000 80%);
+  mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .55) 40%, #000 80%);
+}
+
+.kb__over {
+  position: absolute;
+  inset: 0;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  pointer-events: none;
+}
+.kb__legend, .kb__panel { pointer-events: auto; }
+.kb__legend {
+  position: absolute;
+  top: 60px;
+  right: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .95);
+  box-shadow: var(--shadow-card);
+  font-size: 13.5px;
+  color: var(--text);
+}
+.kb__legend span { display: flex; align-items: center; gap: 8px; }
+.kb__legend .karta__key { display: block; width: 12px; height: 12px; border-radius: 50%; }
+.karta__key--dot-grey { background: #8FA0AF; }
+
+.kb__panel {
+  position: absolute;
+  top: 60px;
+  bottom: 40px;
+  left: var(--pad);
+  width: 330px;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 8px 10px 12px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: var(--shadow-card);
+}
+.kb__title { margin: 0 0 2px 6px; font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--head); }
+.kb__panel .karta__cap { margin: 12px 0 4px 6px; }
+.kb__rows { display: flex; flex-direction: column; }
+.kb__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 24px;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 4px 8px 4px 6px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 14.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.kb__row:hover, .kb__row.is-hover { background: var(--bg); }
+.kb__row.is-on { background: var(--hero-bg); color: var(--blue); }
+.kb__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb__dots { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: 96px; }
+.kb__dots .plitka__dot { width: 7px; height: 7px; }
+.kb__dots .plitka__dot--unknown { background: #8FA0AF; box-shadow: none; }
+.kb__n { font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--blue); text-align: right; }
+
+.kb__foot { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 28px; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.kb__foot .karta__hint { color: var(--text); }
+
+/* телефон: город по центру кадра, подписи прячутся (при такой ширине они
+   мельче 9px), точки крупнее, легенда и панель уходят под карту */
+@media (max-width: 767.98px) {
+  .kb__map { height: 440px; }
+  .kb__map .karta__svg { width: auto; left: 50%; transform: translateX(calc(-1 * var(--x))); }
+  .kb .karta__names, .kb .karta__rl { display: none; }
+  .kb .karta__t circle:last-child { r: 9; }
+  .kb__sky { height: 24%; }
+  .kb__over { position: static; display: flex; flex-direction: column; gap: 12px; padding: 0 var(--pad); }
+  .kb__legend { order: -1; position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 16px; padding: 0; border: 0; background: none; box-shadow: none; }
+  .kb__panel { position: static; width: auto; overflow: visible; padding: 12px; }
+  .kb__rows { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 6px; }
+  .kb__row { grid-template-columns: minmax(0, 1fr) auto; min-height: 44px; }
+  .kb__dots { display: none; }
+  .kb__name { overflow: visible; white-space: normal; hyphens: auto; line-height: 1.25; }
+  .kb__foot { margin-top: 12px; }
+}

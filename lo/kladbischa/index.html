@@ -405,6 +405,17 @@
   });
   if (rayonChip) rayonChip.addEventListener('click', function () { pick(rayon); });
 
+  // район под курсором подсвечивается сразу везде: на карте и в панели районов
+  picks.forEach(function (el) {
+    ['mouseenter', 'mouseleave'].forEach(function (ev) {
+      el.addEventListener(ev, function () {
+        picks.forEach(function (p) {
+          if (p.dataset.pick === el.dataset.pick) p.classList.toggle('is-hover', ev === 'mouseenter');
+        });
+      });
+    });
+  });
+
   // подсказка у курсора: название района или кладбища и что там с местами
   var tip = document.getElementById('karta-tip');
   if (tip && window.matchMedia('(hover: hover)').matches) {
